@@ -62,7 +62,7 @@ public class WeatherFunctions extends Application {
                     JSONObject main = json.getJSONObject("main");
                     DateFormat format = DateFormat.getDateTimeInstance();
 
-                    String temp = String.format("%.2f", main.getDouble("temp")) + "°";
+                    String temp = String.format("%d", main.getInt("temp")) + "°";
                     delegate.processFinish(temp);
                 }
             } catch (JSONException e) {

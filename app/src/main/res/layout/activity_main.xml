@@ -4,19 +4,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_sunny"
+    android:fitsSystemWindows="true"
     tools:context="com.manutastic.weatheriffic.MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="10dp">
+        <RelativeLayout
+            android:id="@+id/top_menu_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            >
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                app:layout_constraintLeft_toRightOf="parent"
+                android:src="@drawable/ic_menu"
+                style="?android:attr/borderlessButtonStyle"/>
 
-    <TextView
-        android:id="@+id/current_temp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="#000000"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="50sp"
-        />
+            <Button
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="F°"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:layout_alignParentEnd="true"
+                />
+        </RelativeLayout>
 
+        <TextView
+            android:id="@+id/current_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#ebebeb"
+            android:textSize="110sp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/top_menu_bar"
+            tools:text="72°" />
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ebebeb"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/current_temp"
+            tools:text="City, State" />
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="100dp"
+            android:layout_below="@id/location"
+            card_view:cardCornerRadius="10dp"
+            card_view:cardElevation="16dp"
+            card_view:cardUseCompatPadding="true">
+
+            <TextView
+                android:id="@+id/info_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:text="Hello world"
+                />
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
