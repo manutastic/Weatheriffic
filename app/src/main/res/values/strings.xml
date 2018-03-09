@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Weatheriffic</string>
+    <string name="low_temp">Low</string>
+    <string name="high_temp">High</string>
+    <string name="sunrise">Sunrise:</string>
+    <string name="sunset">Sunset:</string>
+    <string name="humidity">Humidity:</string>
+    <string name="pressure">Pressure:</string>
+    <string name="visibility">Visibility:</string>
+    <string name="wind">Wind:</string>
+    <string name="data_credit">Data from OpenWeatherMap</string>
+    <string name="f">F°</string>
+    <string name="action_settings">Settings</string>
 </resources>

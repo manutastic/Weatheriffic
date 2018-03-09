@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -31,8 +32,16 @@ public class WeatherFunctions extends Application {
         mContext = this;
     }
 
+    public static String degreeToCardinal(int deg) {
+        String[] compass = {"N","NNE","NE","ENE","E","ESE", "SE", "SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"};
+        int index = (int)Math.round((deg/22.5) + .5); // Change in direction every 22.5 degrees, +.5 for rounding
+        return compass[index];
+    }
+
     public interface AsyncResponse {
-        void processFinish(String output);
+        void processFinish(String output01, String output02, String output03, String output04, String output05,
+                           String output06, String output07, String output08, String output09, String output10,
+                           String output11, String output12);
     }
 
     public static class placeIdTask extends AsyncTask<String, Void, JSONObject>{
@@ -60,10 +69,22 @@ public class WeatherFunctions extends Application {
                 if (json != null) {
                     JSONObject details = json.getJSONArray("weather").getJSONObject(0);
                     JSONObject main = json.getJSONObject("main");
-                    DateFormat format = DateFormat.getDateTimeInstance();
+                    SimpleDateFormat sdf =  new SimpleDateFormat("h:mm a" );
 
-                    String temp = String.format("%d", main.getInt("temp")) + "°";
-                    delegate.processFinish(temp);
+                    String current_temp = String.format("%d", main.getInt("temp")) + "°";
+                    String location = json.getString("name");
+                    String high_temp = String.format("%d", main.getInt("temp_max")) + "°";
+                    String low_temp = String.format("%d", main.getInt("temp_min")) + "°";
+                    String condition = TextUtilities.toTitleCase(details.getString("description"));
+                    String sunrise = sdf.format(new Date(json.getJSONObject("sys").getLong("sunrise")*1000));
+                    String sunset = sdf.format(new Date(json.getJSONObject("sys").getLong("sunset")*1000));
+                    String humidity = String.format("%d", main.getInt("humidity")) + "%";
+                    String pressure = String.format("%d", main.getInt("pressure")) + " hPa";
+                    String visibility = String.format("%d", json.getInt("visibility")) + " mi";
+                    String wind = String.format(json.getJSONObject("wind").getString("speed")) + " mph";
+                    String wind_dir = degreeToCardinal(json.getJSONObject("wind").getInt("deg"));
+                    delegate.processFinish(current_temp, location, high_temp, low_temp, condition,
+                            sunrise, sunset, humidity, pressure, visibility, wind, wind_dir);
                 }
             } catch (JSONException e) {
                 Log.e("Error", "Cannot process JSON results", e);
