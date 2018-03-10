@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@style/AppTheme"
+    app:popupTheme="@style/AppTheme">
     <item
-        android:id="@+id/action_favorite"
+        android:id="@+id/action_units"
         android:title="@string/f"
         app:showAsAction="ifRoom"/>
 </menu>

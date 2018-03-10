@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class WeatherFunctions extends Application {
-    public static final String API_URL = "http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&units=imperial";
+    public static final String API_URL = "http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&units=%s";
     public static Context mContext;
 
     public static Context getContext(){
@@ -55,7 +55,7 @@ public class WeatherFunctions extends Application {
         protected JSONObject doInBackground(String... params) {
             JSONObject weather = null;
             try {
-                weather = getJSONData(params[0], params[1]);
+                weather = getJSONData(params[0], params[1], params[2]);
             } catch (Exception e){
                 Log.d("Error", "Cannot process JSON", e);
             }
@@ -81,7 +81,7 @@ public class WeatherFunctions extends Application {
                     String humidity = String.format("%d", main.getInt("humidity")) + "%";
                     String pressure = String.format("%d", main.getInt("pressure")) + " hPa";
                     String visibility = String.format("%d", json.getInt("visibility")) + " mi";
-                    String wind = String.format(json.getJSONObject("wind").getString("speed")) + " mph";
+                    String wind = String.format(json.getJSONObject("wind").getString("speed"));
                     String wind_dir = degreeToCardinal(json.getJSONObject("wind").getInt("deg"));
                     delegate.processFinish(current_temp, location, high_temp, low_temp, condition,
                             sunrise, sunset, humidity, pressure, visibility, wind, wind_dir);
@@ -92,9 +92,9 @@ public class WeatherFunctions extends Application {
         }
     }
 
-    public static JSONObject getJSONData(String lat, String lon) {
+    public static JSONObject getJSONData(String lat, String lon, String units) {
         try {
-            URL url = new URL(String.format(API_URL, lat, lon));
+            URL url = new URL(String.format(API_URL, lat, lon, units));
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.addRequestProperty("x-api-key", WeatherFunctions.getContext().getResources().getString(R.string.api_key));
 

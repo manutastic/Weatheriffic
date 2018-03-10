@@ -1,17 +1,34 @@
 package com.manutastic.weatheriffic;
 
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import static com.manutastic.weatheriffic.WeatherFunctions.mContext;
 
 public class MainActivity extends AppCompatActivity {
+
+    String units = "imperial";
 
     TextView current_temp_field, location_field, high_temp_field, low_temp_field, condition_field,
             sunrise_field, sunset_field, humidity_field, pressure_field, visibility_field, wind_field,
             wind_dir_field;
     ImageView condition_icon_image;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.appbar, menu);
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +37,17 @@ public class MainActivity extends AppCompatActivity {
         Toolbar appBar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(appBar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        appBar.setTitle("");
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow(); // in Activity's onCreate() for instance
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
+
+        updateWeather();
+    }
+
+    public void updateWeather() {
         current_temp_field = (TextView)findViewById(R.id.current_temp);
         location_field = (TextView)findViewById(R.id.location);
         high_temp_field = (TextView)findViewById(R.id.high_temp);
@@ -53,7 +80,32 @@ public class MainActivity extends AppCompatActivity {
                 wind_dir_field.setText(wind_dir);
             }
         });
-        asyncTask.execute("40.7306", "-73.9867"); // Latitude N, Longitude E;
+        asyncTask.execute("40.7306", "-73.9867", units); // Latitude N, Longitude E;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_units:
+                // Change units
+                if (units == "imperial") {
+                    units = "metric";
+                    item.setTitle(getResources().getString(R.string.c));
+                    TextView wind_units = (TextView)findViewById(R.id.wind_units);
+                    wind_units.setText(getResources().getString(R.string.wind_units_metric));
+                    updateWeather();
+                } else if (units == "metric") {
+                    units = "imperial";
+                    item.setTitle(getResources().getString(R.string.f));
+                    TextView wind_units = (TextView)findViewById(R.id.wind_units);
+                    wind_units.setText(getResources().getString(R.string.wind_units_imperial));
+                    updateWeather();
+                }
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

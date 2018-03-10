@@ -10,5 +10,8 @@
     <string name="wind">Wind:</string>
     <string name="data_credit">Data from OpenWeatherMap</string>
     <string name="f">F°</string>
+    <string name="c">C°</string>
+    <string name="wind_units_imperial">mph</string>
+    <string name="wind_units_metric">m/s</string>
     <string name="action_settings">Settings</string>
 </resources>

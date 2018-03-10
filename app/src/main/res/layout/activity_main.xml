@@ -2,15 +2,22 @@
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background_gradient"
+    android:paddingBottom="50dp"
+    android:paddingTop="25dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent" />
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_sunny"
-        android:fitsSystemWindows="true"
+        android:layout_below="@id/appbar"
         tools:context="com.manutastic.weatheriffic.MainActivity">
 
         <RelativeLayout
@@ -24,10 +31,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="90dp"
+                android:paddingLeft="20dp"
+                android:layout_marginTop="50dp"
                 android:fontFamily="sans-serif-light"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#ebebeb"
+                android:textColor="@color/colorLightText"
                 android:textSize="110sp"
                 tools:text="72°" />
 
@@ -40,7 +48,7 @@
                 android:layout_marginTop="-20dp"
                 android:textColor="#ebebeb"
                 android:textSize="20sp"
-                tools:text="City, State" />
+                tools:text="Miami" />
 
             <!-- Highlights -->
             <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -71,7 +79,7 @@
                             android:id="@+id/high_temp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/textSecondary"
+                            android:paddingLeft="10dp"
                             android:textSize="30sp"
                             tools:text="74°" />
 
@@ -81,7 +89,7 @@
                             android:text="@string/high_temp"
                             android:textAlignment="center"
                             android:textAllCaps="true"
-                            android:textColor="@color/textSecondary"
+                            android:textColor="@color/colorDarkSecondaryText"
                             android:textSize="13sp" />
                     </LinearLayout>
 
@@ -117,7 +125,7 @@
                             android:id="@+id/low_temp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/textSecondary"
+                            android:paddingLeft="10dp"
                             android:textSize="30sp"
                             tools:text="56°" />
 
@@ -127,7 +135,7 @@
                             android:text="@string/low_temp"
                             android:textAlignment="center"
                             android:textAllCaps="true"
-                            android:textColor="@color/textSecondary"
+                            android:textColor="@color/colorDarkSecondaryText"
                             android:textSize="13sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -177,6 +185,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
+                            android:textColor="@color/colorDarkSecondaryText"
                             android:text="@string/sunrise"
                             android:textAllCaps="true" />
                         <TextView
@@ -190,6 +199,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
+                            android:textColor="@color/colorDarkSecondaryText"
                             android:text="@string/sunset"
                             android:textAllCaps="true" />
                         <TextView
@@ -213,6 +223,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
+                            android:textColor="@color/colorDarkSecondaryText"
                             android:text="@string/humidity"
                             android:textAllCaps="true" />
                         <TextView
@@ -236,6 +247,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
+                            android:textColor="@color/colorDarkSecondaryText"
                             android:text="@string/pressure"
                             android:textAllCaps="true" />
                         <TextView
@@ -259,6 +271,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
+                            android:textColor="@color/colorDarkSecondaryText"
                             android:text="@string/visibility"
                             android:textAllCaps="true" />
                         <TextView
@@ -282,6 +295,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
+                            android:textColor="@color/colorDarkSecondaryText"
                             android:text="@string/wind"
                             android:textAllCaps="true" />
                         <TextView
@@ -295,8 +309,17 @@
                             android:id="@+id/wind"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
                             android:textStyle="bold"
-                            tools:text="12.5 mph" />
+                            tools:text="12.5" />
+                        <TextView
+                            android:id="@+id/wind_units"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:text="@string/wind_units_imperial"
+                            tools:text="mph"
+                            />
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -330,18 +353,12 @@
 
         </RelativeLayout>
     </ScrollView>
+    <!-- Fade
     <ImageView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@drawable/gradient_fade"
         android:layout_below="@id/appbar"/>
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#449FFC"
-        android:layout_alignParentTop="true"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        -->
 </RelativeLayout>
