@@ -1,5 +1,6 @@
 package com.manutastic.weatheriffic;
 
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     String units = "imperial";
 
     TextView current_temp_field, location_field, high_temp_field, low_temp_field, condition_field,
-            sunrise_field, sunset_field, humidity_field, pressure_field, visibility_field, wind_field,
+            sunrise_field, sunset_field, humidity_field, pressure_field, wind_field,
             wind_dir_field;
     ImageView condition_icon_image;
 
@@ -58,14 +59,14 @@ public class MainActivity extends AppCompatActivity {
         sunset_field = (TextView)findViewById(R.id.sunset);
         humidity_field = (TextView)findViewById(R.id.humidity);
         pressure_field = (TextView)findViewById(R.id.pressure);
-        visibility_field = (TextView)findViewById(R.id.visibility);
         wind_field = (TextView)findViewById(R.id.wind);
         wind_dir_field = (TextView)findViewById(R.id.wind_dir);
+        condition_icon_image = (ImageView)findViewById(R.id.condition_icon);
 
         WeatherFunctions.placeIdTask asyncTask = new WeatherFunctions.placeIdTask(new WeatherFunctions.AsyncResponse(){
             public void processFinish(String current_temp, String location, String high_temp, String low_temp, String condition,
-                                      String sunrise, String sunset, String humidity, String pressure, String visibility, String wind,
-                                      String wind_dir) {
+                                      String sunrise, String sunset, String humidity, String pressure, String wind,
+                                      String wind_dir, int weather_icon) {
                 current_temp_field.setText(current_temp);
                 location_field.setText(location);
                 high_temp_field.setText(high_temp);
@@ -75,12 +76,12 @@ public class MainActivity extends AppCompatActivity {
                 sunset_field.setText(sunset);
                 humidity_field.setText(humidity);
                 pressure_field.setText(pressure);
-                visibility_field.setText(visibility);
                 wind_field.setText(wind);
                 wind_dir_field.setText(wind_dir);
+                condition_icon_image.setImageResource(weather_icon);
             }
         });
-        asyncTask.execute("40.7306", "-73.9867", units); // Latitude N, Longitude E;
+        asyncTask.execute("55.7558", "37.6173", units); // Latitude N, Longitude E;
     }
 
     @Override

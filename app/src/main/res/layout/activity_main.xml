@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:paddingLeft="20dp"
+                android:paddingLeft="40dp"
                 android:layout_marginTop="50dp"
                 android:fontFamily="sans-serif-light"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -57,7 +57,7 @@
                 android:layout_height="200dp"
                 android:layout_below="@id/location"
                 android:layout_gravity="center"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="80dp"
                 card_view:cardBackgroundColor="@color/cardview_light_background"
                 card_view:cardCornerRadius="10dp"
                 card_view:cardElevation="16dp"
@@ -256,30 +256,6 @@
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             tools:text="1005 hPa" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:orientation="horizontal">
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginRight="20dp"
-                            android:src="@drawable/ic_visibility" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
-                            android:textColor="@color/colorDarkSecondaryText"
-                            android:text="@string/visibility"
-                            android:textAllCaps="true" />
-                        <TextView
-                            android:id="@+id/visibility"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            tools:text="10 mi" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
