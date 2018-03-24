@@ -27,6 +27,8 @@
 
             <TextView
                 android:id="@+id/current_temp"
+                android:onClick="tempClick"
+                android:clickable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -109,6 +111,7 @@
                         <TextView
                             android:id="@+id/condition"
                             android:layout_width="wrap_content"
+                            android:textAlignment="center"
                             android:layout_height="wrap_content"
                             android:textSize="15sp"
                             tools:text="Sunny" />
